@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: http-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: http-test-service
+  template:
+    metadata:
+      labels:
+        service: http-test-service
+    spec:
+      containers:
+        - name: http-test
+          image: http-test
+          imagePullPolicy:  Never
+          ports:
+            - name: http-test-ep
+              containerPort: 3000
+      restartPolicy: Always
